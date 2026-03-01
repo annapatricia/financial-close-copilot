@@ -4,6 +4,18 @@ import streamlit as st
 import subprocess
 import sys
 
+def safe_for_streamlit(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Evita erro LargeUtf8 no Streamlit Cloud.
+    Converte colunas de texto para 'object' (string normal) e padroniza tipos.
+    """
+    out = df.copy()
+    for col in out.columns:
+        # Converte qualquer coluna de texto para string "normal"
+        if out[col].dtype == "object" or str(out[col].dtype).startswith("string"):
+            out[col] = out[col].astype(str)
+    return out
+
 st.set_page_config(page_title="Financial Close Copilot", layout="wide")
 
 REPORTS_DIR = Path("reports")
@@ -85,8 +97,8 @@ summary = (
 left, right = st.columns([1, 1])
 
 with left:
-    st.dataframe(summary, use_container_width=True)
-
+    st.dataframe(safe_for_streamlit(summary), use_container_width=True)
+    
 with right:
     pivot = gl.pivot_table(index="gl_name", columns="dc", values="amount", aggfunc="sum").fillna(0)
     # gráfico simples: receita e despesa (onde existir)
@@ -95,8 +107,8 @@ with right:
         chart_df["D"] = 0.0
     if "C" not in chart_df.columns:
         chart_df["C"] = 0.0
-    st.bar_chart(chart_df[["D", "C"]])
-
+    st.bar_chart(safe_for_streamlit(chart_df[["D", "C"]]))
+    
 st.markdown("---")
 
 # --------- Séries por data ----------
@@ -108,8 +120,8 @@ daily = (
       .sum()
       .sort_values("posting_date")
 )
-
-st.line_chart(daily.pivot(index="posting_date", columns="gl_name", values="amount").fillna(0))
+ts = daily.pivot(index="posting_date", columns="gl_name", values="amount").fillna(0)
+st.line_chart(safe_for_streamlit(ts))
 
 st.markdown("---")
 
@@ -120,4 +132,5 @@ if anoms is None or len(anoms) == 0:
     st.info("Nenhuma anomalia encontrada (ou o arquivo não existe). Para gerar: rode `python src/ml_anomaly.py`.")
 else:
     st.write(f"Total de anomalias: **{len(anoms)}**")
-    st.dataframe(anoms.sort_values("amount", ascending=False), use_container_width=True)
+    st.dataframe(safe_for_streamlit(anoms.sort_values("amount", ascending=False)), use_container_width=True)
+    
