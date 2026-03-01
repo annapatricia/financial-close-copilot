@@ -67,79 +67,76 @@ streamlit run app.py
 
 ---
 
-## Componentes principais
+---
 
-### RPA (ingestão + auditoria)
+## 🧩 Componentes do Projeto
 
-Script: src/rpa_ingest.py
+### 🤖 1. RPA — Ingestão & Auditoria
 
-Ação: move arquivos da inbox/ para data/raw/ com timestamp
+| Item | Descrição |
+|------|------------|
+| **Script** | `src/rpa_ingest.py` |
+| **Função** | Move arquivos de `inbox/` → `data/raw/` com timestamp |
+| **Auditoria** | Gera `reports/audit_trail.csv` |
 
-Auditoria: reports/audit_trail.csv
-
-ETL (RAW → CLEAN → CURATED)
-
-Script: src/etl_transform.py
-
-Clean: padronização, remoção de duplicidade, conversão de tipos
-
-Curated: criação de lançamentos contábeis simulados (D/C)
-
-Controles de fechamento
-
-Script: src/controls.py
-
-Gera reports/close_report.csv com:
-
-Receita Total
-
-Despesa Total
-
-Lucro Estimado
-
-Balance issues (diferença D vs C)
-
-Close Readiness Score
-
-ML (anomalias)
-
-Script: src/ml_anomaly.py
-
-Modelo: IsolationForest (baseline)
-
-Output: reports/anomalies_only.csv
-
-Testes e CI (GitHub Actions)
-
-Workflow: .github/workflows/ci.yml
-
-Executa:
-
-instalação de dependências
-
-smoke test do pipeline core
-
-pytest
-
-Rodar localmente:
-
-pytest -q
-Próximos passos (ideias de evolução)
-
-Adicionar mais fontes (ex.: ERP/SAP simulado, rate FX, centros de custo)
-
-Regras contábeis mais realistas (mapeamento de contas, conciliações)
-
-Camadas de governança (versionamento de regras e trilha de auditoria)
-
-Deploy “enterprise” com Docker + cloud (ECS/Fargate / Render)
-
-Licença
-
-Uso educacional / portfólio.
-
+Automatiza o recebimento de arquivos e garante rastreabilidade.
 
 ---
 
-Se você me colar aqui o seu link final do app (`https://...streamlit.app`), eu devolvo a linha já preenchida certinha (e, se quiser, com um badge “Open in Streamlit”).
+### 🔄 2. ETL — RAW → CLEAN → CURATED
 
+| Camada | Descrição |
+|--------|------------|
+| **RAW** | Arquivos ingeridos automaticamente |
+| **CLEAN** | Padronização, remoção de duplicidade, conversão de tipos |
+| **CURATED** | Geração de lançamentos contábeis simulados (D/C) |
+
+Script principal:  
+`src/etl_transform.py`
+
+---
+
+### 📊 3. Controles de Fechamento
+
+Script: `src/controls.py`
+
+Gera o relatório:
+
+`reports/close_report.csv`
+
+**Indicadores calculados:**
+
+- Receita Total  
+- Despesa Total  
+- Lucro Estimado  
+- Balance Issues (Diferença D vs C)  
+- Close Readiness Score  
+
+---
+
+### 🧠 4. Machine Learning (Anomalias)
+
+| Item | Descrição |
+|------|------------|
+| **Script** | `src/ml_anomaly.py` |
+| **Modelo** | IsolationForest |
+| **Saída** | `reports/anomalies_only.csv` |
+
+Detecção simples de lançamentos atípicos.
+
+---
+
+## ⚙️ CI & Testes Automatizados
+
+Workflow: `.github/workflows/ci.yml`
+
+Executa automaticamente a cada `push`:
+
+- Instala dependências  
+- Roda smoke test do pipeline  
+- Executa `pytest`
+
+Rodar localmente:
+
+```bash
+pytest -q
