@@ -1,4 +1,7 @@
-﻿# Financial Close Copilot (ETL + RPA + ML)
+﻿
+# Financial Close Copilot (ETL + RPA + ML)
+
+![CI](https://github.com/annapatricia/financial-close-copilot/actions/workflows/ci.yml/badge.svg)
 
 Projeto demonstrativo com dados fictícios para simular fechamento contábil mensal.
 
