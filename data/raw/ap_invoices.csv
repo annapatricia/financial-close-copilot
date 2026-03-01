@@ -1,0 +1,11 @@
+invoice_id,vendor,amount,invoice_date,cost_center
+1001,Fornecedor C,7368.82,2024-12-01,RH
+1002,Fornecedor A,6151.15,2024-12-02,RH
+1003,Fornecedor C,4295.79,2024-12-03,Financeiro
+1004,Fornecedor C,5813.84,2024-12-04,RH
+1005,Fornecedor A,4304.87,2024-12-05,Financeiro
+1006,Fornecedor A,4301.41,2024-12-06,Financeiro
+1007,Fornecedor C,5362.94,2024-12-07,RH
+1008,Fornecedor B,2130.08,2024-12-08,Financeiro
+1009,Fornecedor C,2412.62,2024-12-09,RH
+1010,Fornecedor C,4156.57,2024-12-10,RH

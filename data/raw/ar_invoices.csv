@@ -1,0 +1,11 @@
+invoice_id,customer,amount,invoice_date,region
+2001,Cliente X,6798.72,2024-12-01,Sudeste
+2002,Cliente Z,7416.61,2024-12-02,Sudeste
+2003,Cliente X,6796.59,2024-12-03,Sul
+2004,Cliente Z,11704.56,2024-12-04,Nordeste
+2005,Cliente Z,7973.01,2024-12-05,Sudeste
+2006,Cliente X,5884.58,2024-12-06,Sudeste
+2007,Cliente X,9645.09,2024-12-07,Sudeste
+2008,Cliente Z,5558.31,2024-12-08,Sudeste
+2009,Cliente Y,8417.73,2024-12-09,Sudeste
+2010,Cliente X,4080.66,2024-12-10,Sudeste
