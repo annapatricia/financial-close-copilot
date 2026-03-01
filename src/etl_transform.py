@@ -9,9 +9,30 @@ def ensure_dirs():
     CLEAN_DIR.mkdir(parents=True, exist_ok=True)
     CURATED_DIR.mkdir(parents=True, exist_ok=True)
 
+def get_latest_file(prefix: str):
+    """
+    Busca o arquivo mais recente em data/raw
+    que contenha o prefixo no nome.
+    """
+    files = list(RAW_DIR.glob(f"*{prefix}*.csv"))
+
+    if not files:
+        raise FileNotFoundError(f"Nenhum arquivo encontrado para prefixo: {prefix}")
+
+    latest = max(files, key=lambda x: x.stat().st_mtime)
+    return latest
+
+
 def load_raw():
-    ap = pd.read_csv(RAW_DIR / "ap_invoices.csv")
-    ar = pd.read_csv(RAW_DIR / "ar_invoices.csv")
+    ap_file = get_latest_file("ap")
+    ar_file = get_latest_file("ar")
+
+    print(f"Usando AP: {ap_file.name}")
+    print(f"Usando AR: {ar_file.name}")
+
+    ap = pd.read_csv(ap_file)
+    ar = pd.read_csv(ar_file)
+
     return ap, ar
 
 def clean_ap(ap: pd.DataFrame) -> pd.DataFrame:
