@@ -71,7 +71,7 @@ c2.metric("Despesa Total", f"{row.get('despesa_total', 0):,.2f}")
 c3.metric("Lucro Estimado", f"{row.get('lucro_estimado', 0):,.2f}")
 c4.metric("Close Readiness Score", f"{int(row.get('close_readiness_score', 0))}")
 
-st.divider()
+st.markdown("---")
 
 # --------- Resumo por conta ----------
 st.subheader("Resumo por conta (GL)")
@@ -97,7 +97,7 @@ with right:
         chart_df["C"] = 0.0
     st.bar_chart(chart_df[["D", "C"]])
 
-st.divider()
+st.markdown("---")
 
 # --------- Séries por data ----------
 st.subheader("Evolução (por data)")
@@ -111,7 +111,7 @@ daily = (
 
 st.line_chart(daily.pivot(index="posting_date", columns="gl_name", values="amount").fillna(0))
 
-st.divider()
+st.markdown("---")
 
 # --------- Anomalias (se existir) ----------
 st.subheader("Anomalias (ML)")
