@@ -94,24 +94,15 @@ summary = (
     .sort_values(["gl_name", "dc"])
 )
 
-left, right = st.columns([1, 1])
+# Mostra como texto (evita bugs de serialização no Streamlit Cloud)
+st.markdown("**Totais por conta (D/C):**")
+for _, r in summary.iterrows():
+    st.write(f"- {r['gl_name']} | {r['dc']} : {float(r['amount']):,.2f}")
 
-with left:
-    st.dataframe(safe_for_streamlit(summary), use_container_width=True)
-    
-with right:
-    pivot = gl.pivot_table(index="gl_name", columns="dc", values="amount", aggfunc="sum").fillna(0)
-    # gráfico simples: receita e despesa (onde existir)
-    chart_df = pivot.copy()
-    if "D" not in chart_df.columns:
-        chart_df["D"] = 0.0
-    if "C" not in chart_df.columns:
-        chart_df["C"] = 0.0
-    st.bar_chart(safe_for_streamlit(chart_df[["D", "C"]]))
-    
 st.markdown("---")
 
 # --------- Séries por data ----------
+
 st.subheader("Evolução (por data)")
 
 daily = (
@@ -120,8 +111,11 @@ daily = (
       .sum()
       .sort_values("posting_date")
 )
-ts = daily.pivot(index="posting_date", columns="gl_name", values="amount").fillna(0)
-st.line_chart(safe_for_streamlit(ts))
+
+st.markdown("**Amostra (últimos 10 dias/linhas):**")
+tail = daily.tail(10)
+for _, r in tail.iterrows():
+    st.write(f"- {r['posting_date'].date()} | {r['gl_name']}: {float(r['amount']):,.2f}")
 
 st.markdown("---")
 
