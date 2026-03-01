@@ -65,6 +65,8 @@ python src/ml_anomaly.py
 4) Rodar o dashboard
 streamlit run app.py
 
+---
+
 ## Componentes principais
 
 ### RPA (ingestão + auditoria)
