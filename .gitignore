@@ -17,3 +17,25 @@ Thumbs.db
 data/clean/
 data/curated/
 reports/
+
+data/raw/*
+
+# env
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# data & outputs
+data/raw/
+data/clean/
+data/curated/
+reports/
+
+# streamlit cache
+.streamlit/secrets.toml
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
