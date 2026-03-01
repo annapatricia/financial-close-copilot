@@ -11,6 +11,7 @@ Projeto demonstrativo com dados fictícios para simular fechamento contábil men
 - ML: detecção simples de anomalias / classificação
 - Insights: KPIs e variação mês a mês
 
+```
 financial-close-copilot/
 ├─ app.py
 ├─ README.md
@@ -37,4 +38,5 @@ financial-close-copilot/
 │  ├─ clean/      (NÃO versionar)
 │  └─ curated/    (NÃO versionar)
 ├─ reports/       (NÃO versionar)
-└─ inbox/         (pode manter .gitkeep) 
+└─ inbox/         (pode manter .gitkeep)
+```
