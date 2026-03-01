@@ -43,6 +43,7 @@ Projeto demonstrativo com dados fictícios que simula um **fechamento contábil 
 └─ tests/
 └─ test_controls.py
 ```
+```
 ├─ app.py
 ├─ requirements.txt
 ├─ runtime.txt
@@ -57,6 +58,7 @@ Projeto demonstrativo com dados fictícios que simula um **fechamento contábil 
 │ └─ run_pipeline.py
 └─ tests/
 └─ test_controls.py
+```
 
 
 **Observação:** pastas de dados e outputs (`data/*`, `reports/*`) são geradas em runtime e não são versionadas (ver `.gitignore`).
