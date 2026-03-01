@@ -27,22 +27,6 @@ Projeto demonstrativo com dados fictícios que simula um **fechamento contábil 
 ---
 
 ## Estrutura do repositório
-
-```├─ app.py
-├─ requirements.txt
-├─ runtime.txt
-├─ .streamlit/config.toml
-├─ .github/workflows/ci.yml
-├─ src/
-│ ├─ generate_fake_data.py
-│ ├─ rpa_ingest.py
-│ ├─ etl_transform.py
-│ ├─ controls.py
-│ ├─ ml_anomaly.py
-│ └─ run_pipeline.py
-└─ tests/
-└─ test_controls.py
-```
 ```
 ├─ app.py
 ├─ requirements.txt
