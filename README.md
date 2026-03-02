@@ -70,74 +70,98 @@ streamlit run app.py
 ---
 
 
-## Componentes do Projeto
+Componentes do Projeto
 
-### 🤖 1. RPA — Ingestão & Auditoria
+O projeto está estruturado em cinco blocos principais que representam o fluxo completo do fechamento contábil: ingestão, transformação, controle, análise e visualização.
 
-| Item | Descrição |
-|------|------------|
-| **Script** | `src/rpa_ingest.py` |
-| **Função** | Move arquivos de `inbox/` → `data/raw/` com timestamp |
-| **Auditoria** | Gera `reports/audit_trail.csv` |
+🤖 1. RPA — Ingestão & Auditoria
 
-Automatiza o recebimento de arquivos e garante rastreabilidade.
+Script: src/rpa_ingest.py
 
----
+Função:
 
-### 🔄 2. ETL — RAW → CLEAN → CURATED
+Move arquivos recebidos de inbox/ para data/raw/
 
-| Camada | Descrição |
-|--------|------------|
-| **RAW** | Arquivos ingeridos automaticamente |
-| **CLEAN** | Padronização, remoção de duplicidade, conversão de tipos |
-| **CURATED** | Geração de lançamentos contábeis simulados (D/C) |
+Aplica timestamp para versionamento
 
-Script principal:  
-`src/etl_transform.py`
+Gera trilha de auditoria
 
----
+Output:
 
-### 📊 3. Controles de Fechamento
+reports/audit_trail.csv
 
-Script: `src/controls.py`
+Objetivo:
+Automatizar o recebimento de arquivos e garantir rastreabilidade completa do processo.
 
-Gera o relatório:
+🔄 2. ETL — RAW → CLEAN → CURATED
 
-`reports/close_report.csv`
+Script principal: src/etl_transform.py
 
-**Indicadores calculados:**
+O pipeline segue arquitetura em camadas:
 
-- Receita Total  
-- Despesa Total  
-- Lucro Estimado  
-- Balance Issues (Diferença D vs C)  
-- Close Readiness Score  
+Camada	Descrição
+RAW	Dados ingeridos automaticamente pelo RPA
+CLEAN	Padronização de colunas, tratamento de tipos, remoção de duplicidades
+CURATED	Base analítica final + geração de lançamentos contábeis simulados (Débito/Crédito)
 
----
+Outputs principais:
 
-### 🧠 4. Machine Learning (Anomalias)
+data/clean/*
 
-| Item | Descrição |
-|------|------------|
-| **Script** | `src/ml_anomaly.py` |
-| **Modelo** | IsolationForest |
-| **Saída** | `reports/anomalies_only.csv` |
+data/curated/fact_gl_entries.csv
 
-Detecção simples de lançamentos atípicos.
+Objetivo:
+Transformar dados operacionais em base confiável para análise financeira.
 
----
+📊 3. Controles de Fechamento
 
-## ⚙️ CI & Testes Automatizados
+Script: src/controls.py
 
-Workflow: `.github/workflows/ci.yml`
+Output:
 
-Executa automaticamente a cada `push`:
+reports/close_report.csv
 
-- Instala dependências  
-- Roda smoke test do pipeline  
-- Executa `pytest`
+Indicadores calculados:
 
-Rodar localmente:
+Receita Total
 
-```bash
-pytest -q
+Despesa Total
+
+Lucro Estimado
+
+Diferença Débito vs Crédito
+
+Close Readiness Score
+
+Objetivo:
+Validar consistência contábil e gerar indicador de prontidão do fechamento.
+
+🧠 4. Machine Learning — Detecção de Anomalias (Opcional)
+
+Script: src/ml_anomaly.py
+
+Modelo utilizado: IsolationForest
+
+Output:
+
+reports/anomalies_only.csv
+
+Objetivo:
+Identificar lançamentos atípicos para priorização de revisão e mitigação de risco.
+
+📈 5. Dashboard Executivo (Streamlit)
+
+Arquivo: app.py
+
+Funcionalidades:
+
+Visualização de KPIs de fechamento
+
+Resumo financeiro consolidado
+
+Indicador de prontidão
+
+Visualização de anomalias
+
+Objetivo:
+Traduzir o pipeline técnico em visão executiva orientada à decisão.
