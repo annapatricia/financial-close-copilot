@@ -69,99 +69,101 @@ streamlit run app.py
 
 ---
 
-
-Componentes do Projeto
+## 🚀 Componentes do Projeto
 
 O projeto está estruturado em cinco blocos principais que representam o fluxo completo do fechamento contábil: ingestão, transformação, controle, análise e visualização.
 
-🤖 1. RPA — Ingestão & Auditoria
+---
 
-Script: src/rpa_ingest.py
+## 🤖 1. RPA — Ingestão & Auditoria
 
-Função:
+**Script:** `src/rpa_ingest.py`
 
-Move arquivos recebidos de inbox/ para data/raw/
+**Responsabilidades:**
+- Move arquivos recebidos de `inbox/` para `data/raw/`
+- Aplica timestamp para versionamento
+- Gera trilha de auditoria
 
-Aplica timestamp para versionamento
+**Output gerado:**
+- `reports/audit_trail.csv`
 
-Gera trilha de auditoria
-
-Output:
-
-reports/audit_trail.csv
-
-Objetivo:
+**Objetivo:**  
 Automatizar o recebimento de arquivos e garantir rastreabilidade completa do processo.
 
-🔄 2. ETL — RAW → CLEAN → CURATED
+---
 
-Script principal: src/etl_transform.py
+## 🔄 2. ETL — RAW → CLEAN → CURATED
+
+**Script principal:** `src/etl_transform.py`
 
 O pipeline segue arquitetura em camadas:
 
-Camada	Descrição
-RAW	Dados ingeridos automaticamente pelo RPA
-CLEAN	Padronização de colunas, tratamento de tipos, remoção de duplicidades
-CURATED	Base analítica final + geração de lançamentos contábeis simulados (Débito/Crédito)
+### 📂 RAW
+Dados ingeridos automaticamente pelo RPA.
 
-Outputs principais:
+### 🧹 CLEAN
+- Padronização de colunas  
+- Conversão de tipos  
+- Remoção de duplicidades  
 
-data/clean/*
+### 📊 CURATED
+- Base analítica final  
+- Geração de lançamentos contábeis simulados (Débito/Crédito)
 
-data/curated/fact_gl_entries.csv
+**Outputs principais:**
+- `data/clean/`
+- `data/curated/fact_gl_entries.csv`
 
-Objetivo:
+**Objetivo:**  
 Transformar dados operacionais em base confiável para análise financeira.
 
-📊 3. Controles de Fechamento
+---
 
-Script: src/controls.py
+## 📊 3. Controles de Fechamento
 
-Output:
+**Script:** `src/controls.py`
 
-reports/close_report.csv
+**Output gerado:**
+- `reports/close_report.csv`
 
-Indicadores calculados:
+### Indicadores calculados:
 
-Receita Total
+- Receita Total  
+- Despesa Total  
+- Lucro Estimado  
+- Diferença Débito vs Crédito  
+- Close Readiness Score  
 
-Despesa Total
-
-Lucro Estimado
-
-Diferença Débito vs Crédito
-
-Close Readiness Score
-
-Objetivo:
+**Objetivo:**  
 Validar consistência contábil e gerar indicador de prontidão do fechamento.
 
-🧠 4. Machine Learning — Detecção de Anomalias (Opcional)
+---
 
-Script: src/ml_anomaly.py
+## 🧠 4. Machine Learning — Detecção de Anomalias (Opcional)
 
-Modelo utilizado: IsolationForest
+**Script:** `src/ml_anomaly.py`
 
-Output:
+**Modelo utilizado:**  
+`IsolationForest`
 
-reports/anomalies_only.csv
+**Output gerado:**
+- `reports/anomalies_only.csv`
 
-Objetivo:
+**Objetivo:**  
 Identificar lançamentos atípicos para priorização de revisão e mitigação de risco.
 
-📈 5. Dashboard Executivo (Streamlit)
+---
 
-Arquivo: app.py
+## 📈 5. Dashboard Executivo (Streamlit)
 
-Funcionalidades:
+**Arquivo:** `app.py`
 
-Visualização de KPIs de fechamento
+### Funcionalidades:
 
-Resumo financeiro consolidado
+- Visualização de KPIs de fechamento  
+- Resumo financeiro consolidado  
+- Indicador de prontidão  
+- Visualização de anomalias  
 
-Indicador de prontidão
-
-Visualização de anomalias
-
-Objetivo:
+**Objetivo:**  
 Traduzir o pipeline técnico em visão executiva orientada à decisão.
