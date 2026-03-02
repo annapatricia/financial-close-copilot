@@ -67,8 +67,6 @@ streamlit run app.py
 
 ---
 
----
-
 ## 🚀 Componentes do Projeto
 
 O projeto está estruturado em cinco blocos principais que representam o fluxo completo do fechamento contábil: ingestão, transformação, controle, análise e visualização.
