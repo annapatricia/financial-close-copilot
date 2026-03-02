@@ -5,7 +5,7 @@
 Demo (Streamlit Cloud): https://SEU-APP.streamlit.app
 
 Projeto demonstrativo com dados fictícios que simula um **fechamento contábil mensal**, com foco em:
-- **RPA** (ingestão e auditoria de arquivos recebidos)
+- **RPA** (ingestão e auditoria de arquivos recebidos) 
 - **ETL** (camadas RAW → CLEAN → CURATED)
 - **Controles de fechamento** (checks contábeis e indicador de prontidão)
 - **ML** (detecção simples de anomalias)
