@@ -69,7 +69,8 @@ streamlit run app.py
 
 ---
 
-## 🧩 Componentes do Projeto
+
+## Componentes do Projeto
 
 ### 🤖 1. RPA — Ingestão & Auditoria
 
